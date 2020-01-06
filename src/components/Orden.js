@@ -8,6 +8,10 @@ const stateInicial ={
     "Cafe con leche": false,
     "Sandwich de jamon": false,
     "Jugo de naranja": false,
+    "Hamburguesa": false,
+    "Acompanamiento": false,
+    "Bebida": false,
+
   }
 }
 
@@ -24,16 +28,18 @@ class Orden  extends Component{
   handleClick = e =>{
     e.preventDefault();
     this.setState({
-      orden:{
-        ...this.state.orden,
+      orden:{...this.state.orden,
         [e.target.name]: true,
         producto:e.target.name
       }
- })
+    });
+    // if(this.state.orden.desayuno){ this.setState({
+    //   orden:{almuerzo: false}})} ;
+
 
 }
   render(){
-    const {desayuno}=this.state.orden;
+    const {desayuno, almuerzo}=this.state.orden;
     return(
       <form onSubmit={this.handleSubmit}>
         <div className="form-group row row-cols-2">
@@ -77,6 +83,27 @@ class Orden  extends Component{
             </div>
           </div>
         </div>:null}
+
+        {almuerzo ?
+          <div className="row row-cols-1">
+            <div className="form-group">
+              <div className="col ">
+                <input type="button" className="py-12 mt-2 btn btn-info btn-block" name="Hamburguesa" value="Hamburguesa" onClick={this.handleClick}></input>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="col">
+                <input type="button" className="py-12 mt-2 btn btn-info btn-block" name="Acompanamiento" value="Acompanamiento" onClick={this.handleClick}></input>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="col">
+                <input type="button" className="py-12 mt-2 btn btn-info btn-block" name="Bebida" value="Bebida" onClick={this.handleClick}></input>
+              </div>
+            </div>
+          </div>
+          :null}
+
         <input type="submit" className="py-3 mt-2 btn btn-success btn-block" value="Agregar a la orden"></input>
       </form>
     );
